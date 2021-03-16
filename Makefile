@@ -45,8 +45,8 @@ ${TARGET}: ${MODULES}
 include make_need_ld_so.mk
 
 install:
-	@echo You would be installing software here
-	@echo Include the following recipe if installing a library:
+	@# You would be installing software here.
+	@# Include the following recipe if installing a library:
 	${NEED_LD_SO_WARN1}
 	${NEED_LD_SO_WARN2}
 

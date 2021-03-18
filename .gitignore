@@ -1,1 +1,8 @@
 c_patterns
+src/columnize.*
+src/get_keypress.*
+src/read_file_lines.*
+src/prompter.*
+src/main.*
+the_app
+

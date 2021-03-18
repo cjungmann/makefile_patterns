@@ -14,7 +14,7 @@ FC_LIBS = readargs expat z
 
 # Default rule should come before all includes
 # that might also include their own rules
-all: Confirm_Libraries Confirm_DB5 ${TARGET}
+all: Confirm_Libraries Confirm_DB5 CP_PREPARE_SOURCES ${TARGET}
 
 # Collect a list of modules from the source code files in the
 # source directory.  If necessary, Use *grep*# between the *ls*
@@ -31,7 +31,9 @@ include make_c_patterns.mk
 MODULES += ${CP_OBJECTS}
 
 include make_confirm_libs.mk
+
 include make_db5.mk
+CFLAGS += ${DB5_INC}
 
 # Note placement of CP_OBJECTS for make_c-patterns.mk and
 # and placement of FC_LINKER_LIBS for make_confirm_libraries.mk
@@ -40,7 +42,7 @@ ${TARGET}: ${MODULES}
 
 # Could skip as this is the same as default rule
 %o: %c
-	${CC} ${CFLAGS} ${DB5_INC} -c -o $@ $<
+	${CC} ${CFLAGS} -c -o $@ $<
 
 include make_need_ld_so.mk
 

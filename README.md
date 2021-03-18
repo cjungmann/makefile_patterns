@@ -6,6 +6,45 @@ unable to build my project.  That shortcoming inspired me to rethink
 my approach.  This project, then, is the place where I will record
 my successful ideas so I can find them later.
 
+I'm changing the organization of the README page, putting descriptions
+of hopefully useful scripts at the top, and the summary of **make**
+structures further down.  This reflects my progress having gone from
+a makefile novice needing to establish the vocabulary for discussing
+ideas, to working out more interesting solutions.
+
+## Objectives
+
+There are twin objectives with this project.  I want a reminder of
+makefile basics when I return to writing them after a interval away.
+I also want to explore methods for writing portable makefile scripts,
+to support both Linux and BSD.
+
+I'm finding some problems with BSD in some cases.  I may be able to
+resolve some of them as I learn more.  I'm not sure how uniform are
+BSD environments: I can kludge solutions, but they may not work on
+different BSD installations.
+
+## Makefile Scripts
+
+- [make_need_ld_so.mk](make_need_ld_so.mk) uses the
+  [shell assign](#variable-assignment) (!=) to determine if the
+  user's runtime environment will search a given directory.
+
+  This may not be necessary for BSD: FreeBSD seems to search
+  `/usr/local/lib` by default.  **ldconfig** on BSD documents
+  `/etc/ld.so.conf`, but FreeBSD, at least, does not have a
+  `/etc/ld.so.conf` file.
+
+- [make_db5.mk](make_db5.mk) looks under `/usr` for *db.h* and
+  *libdb.so* to see if the header file and shared library files
+  are compatible.
+
+- [make_c_patterns.mk](make_c_patterns.mk) is a more complicated
+  script, using targets and recipes to clone my
+  [c_patterns repository](www.github.com/cjungmann/c_patterns.git)
+  and create links to a subset of the contained files in the
+  `src` project directory.
+
 
 ## Significant Concepts
 

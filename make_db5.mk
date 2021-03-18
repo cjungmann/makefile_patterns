@@ -5,10 +5,28 @@
 # warning the user of the need to install it if it is missing.
 
 # USAGE:
-# 1. Include this makefile
-# 2. (Optional) Add Confirm_DB5 prerequisite to default rule
-# 3. Add DB5_INC to CFLAGS, ie:
-#    CFLAGS += ${DB5_INC}
+# 1. Include this makefile after the default rule.
+# 2. (Optional) Add Confirm_DB5 prerequisite to default rule.
+#    This will generate an error and exit if libdb-5.so is not
+#    available.  Omit this step if you want to ignore a missing
+#    library.
+# 3. Add ${DB5_INC} to module-building rules to ensure that the
+#    compiler uses the correct header.  This can be done by
+#    appending ${DB5_INC} to CFLAGS, or to add ${DB5_INC} directly
+#    into the recipe.
+# 4. Add ${DB5_LINK} to the linker recipe.
+#
+# Example:
+#
+# CFLAGS = -Wall -Werror -pedantic -ggdb
+# all: Confirm_DB5 ${TARGET}
+#
+# include make_db5.mk
+# CFLAGS += ${DB5_INC}
+#
+# ${TARGET}: ${MODULES}
+#	${CC} -o $@ $? ${DB5_LINK}
+# 
 
 DB_INSTALLED != find /usr -name db.h 2>/dev/null | grep /include/db.h
 DB_IS_DB5 != a=${DB_INSTALLED}; if grep -q DB_VERSION_MAJOR "$$a"; then echo 1; else echo 0; fi; [ 1 -eq 1 ]

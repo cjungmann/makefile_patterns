@@ -30,6 +30,9 @@ CP_NAMES = get_keypress prompter columnize read_file_lines
 include make_c_patterns.mk
 MODULES += ${CP_OBJECTS}
 
+# Remove duplicates:
+MODULES != echo ${MODULES} | xargs -n1 | sort -u | xargs
+
 include make_confirm_libs.mk
 
 include make_db5.mk
@@ -38,7 +41,7 @@ CFLAGS += ${DB5_INC}
 # Note placement of CP_OBJECTS for make_c-patterns.mk and
 # and placement of FC_LINKER_LIBS for make_confirm_libraries.mk
 ${TARGET}: ${MODULES}
-	${CC} -o $@ $? ${FC_LINKER_LIBS} ${DB5_LINK}
+	${CC} -o $@ ${MODULES} ${FC_LINKER_LIBS} ${DB5_LINK}
 
 # Could skip as this is the same as default rule
 %o: %c

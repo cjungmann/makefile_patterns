@@ -45,8 +45,42 @@ different BSD installations.
   and create links to a subset of the contained files in the
   `src` project directory.
 
+## Portablility Concessions
 
-## Significant Concepts
+First off, please keep in mind that I'm not a makefile guru.  I am
+only recently digging into GNU **make**, and I have even less
+experience with BSD.  What I am offering here are solutions to
+compatibility problems I encountered.  There are doubtless better
+solutions available.
+
+GNU **make** and BSD **make** work in similar standard ways,
+but there will be incompatibilities if you follow either platform's
+recommended recipes.
+
+### GNU Automatic Variables vs. BSD Local Variables
+
+Both platforms provide context-specific variables that expose
+a rule's target, prerequisites, etc, and parts thereof.  There
+is some overlap, with BSD recommending local variables by word
+but also recognizing some special characters that GNU also
+recognizes.   For example, GNU uses `$@` to expose the target
+name, and BSD recommends `.TARGET` while also recognizing
+`$@`.
+
+One useful context variable in GNU that has no BSD counterpart
+is `$^` that contains all names in a list with duplicates pruned.
+There seems to be no BDS equivalent.  For compatibility, I use
+shell commands to prune the list instead:
+
+`MODULES != echo ${MODULES} | xargs n1 | sort -u | xargs`
+
+Refer to BSD: `man -P 'less -p ^\ +Local\ variables -G' make`  
+Refer to Linux `info -nAutomatic\ Variables make`
+
+
+
+
+## General Makefile Concepts
 
 ### Rules
 

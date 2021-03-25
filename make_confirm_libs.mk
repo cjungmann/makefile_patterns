@@ -30,5 +30,5 @@ ${FC_LIBS}:
 	$(eval ACTION != ${FUNC_CHECK} )
 	${ACTION}
 
-# The including makefile can use this variable in the
+# The including makefile can append this value to the LDLIBS variable:
 FC_LINKER_LIBS != echo ${FC_LIBS} | sed -E 's/([^[:space:]]+)/-l\1/g'

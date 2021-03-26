@@ -9,7 +9,7 @@ SRC = src
 
 # Default rule should come before all includes
 # that might also include their own rules
-all: Confirm_Libraries Confirm_DB5 Confirm_Readargs CP_PREPARE_SOURCES ${TARGET}
+all: Confirm_Libraries Confirm_DB5 Confirm_Readargs CP_Prepare_Sources ${TARGET}
 
 # Collect a list of modules from the source code files in the
 # source directory.  If necessary, Use *grep*# between the *ls*

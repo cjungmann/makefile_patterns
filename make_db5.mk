@@ -27,7 +27,7 @@
 # LDLIBS += ${DB5_LINK}
 #
 # ${TARGET}: ${MODULES}
-#	${CC} -o $@ $? ${DB5_LINK}
+#	${CC} -o $@ $? ${LD_LIBS}
 # 
 
 # The first set of variables are used to query
